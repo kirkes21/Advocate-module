@@ -1,37 +1,29 @@
-import React, { useEffect, useState } from "react";
-
-import { fetchTopAuthors_24h } from "../api";
+import React, { useState, useEffect } from "react";
+import { fetchAuthors } from "../api";
+import { TopArticle } from "../components";
 
 const Main = () => {
-  const [topAuthors_24h, setTopAuthors_24h] = useState({});
+  const [authors, setAuthors] = useState([]);
 
   useEffect(() => {
-    const getTopAuthors_24h = async () => {
-      const fetchedAuthors = await fetchTopAuthors_24h();
-      setTopAuthors_24h(fetchedAuthors.data);
+    const getAuthors = async () => {
+      const fetchedAuthors = await fetchAuthors();
+      setAuthors(fetchedAuthors.data);
     };
-    getTopAuthors_24h();
+    getAuthors();
   }, []);
-
-  // const getTopAuthors_24h = async () => {
-  //   const fetchedAuthors = await fetchTopAuthors_24h();
-  //   return fetchedAuthors;
-  // };
-
-  console.log(topAuthors_24h);
 
   return (
     <div>
-      <h1>Top Authors (last 24h)</h1>
-      <div>
-        {topAuthors_24h.map((author, i) => {
-          return (
-            <div key={i}>
-              <h2>{author.author}</h2>
-            </div>
-          );
-        })}
-      </div>
+      {authors.map((author, i) => {
+        return (
+          <div key={`author-name${i}`}>
+            <h3>{author.author}</h3>
+            <TopArticle key={`TopArticle${i}`} author={author.author} />
+            --
+          </div>
+        );
+      })}
     </div>
   );
 };
