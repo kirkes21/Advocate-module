@@ -4,10 +4,7 @@ export const API_SECRET = process.env.REACT_APP_API_SECRET;
 
 export const fetchAuthors = async () => {
   try {
-    const response = await fetch(`${baseURL}/referrers/social/authors?apikey=${API_KEY}&secret=${API_SECRET}&limit=5&sort=fb_referrals`);
-
-    // PAST 24 HOURS:
-    // &period_start=24h
+    const response = await fetch(`${baseURL}/referrers/social/authors?apikey=${API_KEY}&secret=${API_SECRET}&limit=5&period_start=30d`);
 
     const result = await response.json();
 
@@ -19,7 +16,7 @@ export const fetchAuthors = async () => {
 
 export const fetchArticle = async (authorNoSpaces) => {
   try {
-    const response = await fetch(`${baseURL}/referrers/social/posts?apikey=${API_KEY}&secret=${API_SECRET}&limit=1&sort=fb_referrals&author=${authorNoSpaces}`);
+    const response = await fetch(`${baseURL}/referrers/social/posts?apikey=${API_KEY}&secret=${API_SECRET}&limit=1&author=${authorNoSpaces}&period_start=30d`);
 
     const result = await response.json();
 

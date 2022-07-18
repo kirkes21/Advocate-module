@@ -20,7 +20,6 @@ const Main = () => {
           <div key={`author-name${i}`}>
             <h3>{author.author}</h3>
             <TopArticle key={`TopArticle${i}`} author={author.author} />
-            --
           </div>
         );
       })}
